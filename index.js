@@ -19,17 +19,8 @@ function findIndex(arr,id){
     }
 }
 
-function deleteFromIndex(arr, id){
-    let newArr = [];
-    for(let i=0;i<arr.length;i++)
-    {
-        if(arr[i].id !== id)
-        {
-            newArr.push(arr[i]);
-        }
-    }
-    return newArr;
-}
+
+
 app.get('/todos',(req,res)=>{
     res.json(todos)
 })
@@ -45,7 +36,7 @@ app.post('/todos',(req,res)=>{
 })
 
 app.get('/todos/:id',(req,res)=>{
-    const todoIndex = findIndex(arr, parseInt(req.params.id))
+    const todoIndex = findIndex(todos, parseInt(req.params.id))
     if(todoIndex === -1)
     {
         res.status(400).send();
@@ -58,7 +49,7 @@ app.get('/todos/:id',(req,res)=>{
 
 
 app.put('/todos/:id',(req,res)=>{
-    const todoIndex = findIndex(arr, parseInt(req.params.id));
+    const todoIndex = findIndex(todos , parseInt(req.params.id));
     if(todoIndex === -1)
     {
         res.status(400).send();
@@ -72,13 +63,13 @@ app.put('/todos/:id',(req,res)=>{
 })
 
 app.delete('/todos/:id',(req,res)=>{
-    const todoIndex = findIndex(arr, parseInt(req.params.id));
+    const todoIndex = findIndex(todos , parseInt(req.params.id));
     if(todoIndex===-1)
     {
         res.status(400).send();
     }
     else{
-        todos = deleteFromIndex(todos, todoIndex);
+        todos.splice(todoIndex, 1);
         res.status(200).send();
     }
 })
