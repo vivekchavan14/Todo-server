@@ -2,11 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 const port = 5000;
-
+const cors = require('cors');
 
 const todos = [];
 
 app.use(bodyParser.json());
+app.use(cors());
 
 function findIndex(arr,id){
     for(let i=0;i<arr.length;i++)
